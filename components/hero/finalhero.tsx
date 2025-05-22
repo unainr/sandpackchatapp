@@ -5,7 +5,6 @@ import { useAspect, useTexture } from '@react-three/drei';
 import { useMemo, useRef, useState, useEffect } from 'react';
 import * as THREE from 'three/webgpu';
 import { bloom } from 'three/examples/jsm/tsl/display/BloomNode.js';
-import {Mesh} from 'three';
 
 import {
   abs,
@@ -90,16 +89,6 @@ const HEIGHT = 300;
 const Scene = () => {
   const [rawMap, depthMap] = useTexture([TEXTUREMAP.src, DEPTHMAP.src]);
 
-  const meshRef = useRef<Mesh>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    // Показываем изображение после загрузки текстур
-    if (rawMap && depthMap) {
-      setVisible(true);
-    }
-  }, [rawMap, depthMap]);
-
   const { material, uniforms } = useMemo(() => {
     const uPointer = uniform(new THREE.Vector2(0));
     const uProgress = uniform(0);
@@ -134,8 +123,6 @@ const Scene = () => {
 
     const material = new THREE.MeshBasicNodeMaterial({
       colorNode: final,
-      transparent: true,
-      opacity: 0,
     });
 
     return {
@@ -151,32 +138,21 @@ const Scene = () => {
 
   useFrame(({ clock }) => {
     uniforms.uProgress.value = (Math.sin(clock.getElapsedTime() * 0.5) * 0.5 + 0.5);
-    // Плавное появление
-    if (meshRef.current && 'material' in meshRef.current && meshRef.current.material) {
-      const mat = meshRef.current.material as any;
-      if ('opacity' in mat) {
-        mat.opacity = THREE.MathUtils.lerp(
-          mat.opacity,
-          visible ? 1 : 0,
-          0.07
-        );
-      }
-    }
   });
 
   useFrame(({ pointer }) => {
     uniforms.uPointer.value = pointer;
   });
 
-  const scaleFactor = 0.40;
+  const scaleFactor = 0.3;
   return (
-    <mesh ref={meshRef} scale={[w * scaleFactor, h * scaleFactor, 1]} material={material}>
+    <mesh scale={[w * scaleFactor, h * scaleFactor, 1]} material={material}>
       <planeGeometry />
     </mesh>
   );
 };
 
- const HeroSection = () => {
+ const FinalHero = () => {
   const titleWords = 'Build Your Dreams'.split(' ');
   const subtitle = 'AI-powered creativity for the next generation.';
   const [visibleWords, setVisibleWords] = useState(0);
@@ -205,7 +181,7 @@ const Scene = () => {
       <div className="h-svh uppercase items-center w-full absolute z-60 pointer-events-none px-10 flex justify-center flex-col">
         <div className="text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold">
           <div className="flex space-x-2 lg:space-x-6 overflow-hidden text-white">
-            {titleWords.map((word:string, index:number) => (
+            {titleWords.map((word, index) => (
               <div
                 key={index}
                 className={index < visibleWords ? 'fade-in' : ''}
@@ -241,5 +217,5 @@ const Scene = () => {
   );
 };
 
-export default HeroSection;
+export default FinalHero;
 

@@ -11,7 +11,7 @@ import { ModeToggle } from "../ui/mode-toggle";
 
 const menuItems = [
 	{ name: "Home", href: "/" },
-	{ name: "About", href: "/about" },
+	{ name: "Generate Code", href: "/generate" },
 	{ name: "Pricing", href: "#link" },
 ];
 
@@ -64,7 +64,7 @@ const Navbar = () => {
 									<li key={index}>
 										<Link
 											href={item.href}
-											className={`text-muted-foreground hover:text-accent-foreground block duration-150  ${
+											className={`text-muted-foreground block duration-150  ${
 												isActive(item.href) && "text-red-500"
 											}`}>
 											<span>{item.name}</span>

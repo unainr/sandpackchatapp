@@ -1,7 +1,18 @@
-export default function Home() {
+import CodeSnippet from "@/components/CodeSnippet";
+import FinalHero from "@/components/hero/finalhero";
+import { getAllCodes } from "@/lib/actions/model";
+
+export default async function Home() {
+   const response = await getAllCodes() as string |any
+    if(!response) return <div>No data found</div>
   return (
-  <div>
-    <h1>Hello World</h1>
-  </div>
+    <>
+   <FinalHero/>
+   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-3 mx-4">
+        {response && response?.map((codeItem: any) => (
+          <CodeSnippet key={codeItem.id} codeItem={codeItem} />
+        ))}
+      </div>
+    </>
   );
 }
