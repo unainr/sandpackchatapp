@@ -21,8 +21,8 @@ const Generate = async () => {
   </div>
   
   {/* Fixed AI Prompt at bottom */}
-  <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 py-3">
-    <div className="container mx-auto flex justify-center items-center">
+  <div className="fixed bottom-0 left-0 right-0 z-10 bg-white/80 dark:bg-gray-900/30 backdrop-blur-md border-t border-gray-200 dark:border-gray-800">
+    <div className=" mx-auto flex justify-center items-center">
         <AI_Prompt_Demo />
       </div>
   </div>

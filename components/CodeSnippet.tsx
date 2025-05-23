@@ -65,7 +65,7 @@ const CodeSnippet = async ({ codeItem }: string | any) => {
 						</span>
 					</div>
 					<Link href={`/generate/${codeItem._id}`} className="group/button">
-						<button className="px-5 py-3 bg-gradient-to-br from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-xl flex items-center gap-2 text-sm font-semibold transition-all duration-300 shadow-md hover:shadow-xl hover:shadow-blue-500/20">
+						<button className="px-5 py-3 bg-gradient-to-br from-red-600 to-red-700 hover:from-red-700 hover:to-indigo-800 text-white rounded-xl flex items-center gap-2 text-sm font-semibold transition-all duration-300 shadow-md hover:shadow-xl hover:shadow-blue-500/20">
 							<LucideExternalLink className="h-4 w-4 transition-transform duration-300 group-hover/button:translate-x-0.5 group-hover/button:-translate-y-0.5" />
 							View Code
 						</button>
