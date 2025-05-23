@@ -1,5 +1,4 @@
 import {
-	LucideCode,
 	LucideCalendar,
 	LucideExternalLink,
 	LucideTag,
