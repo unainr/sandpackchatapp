@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ModelGenerate } from "@/lib/actions/model";
 import { useRouter } from "next/navigation";
 import { UseAutoResizeTextareaProps } from "@/types";
+import { TextShimmerWave } from "./shimer/text-shimmer";
 
 function useAutoResizeTextarea({
 	minHeight,
@@ -116,6 +117,26 @@ export function AI_Prompt() {
 
 	return (
 		<>
+		{Loading && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50">
+    <TextShimmerWave
+      className='[--base-color:#0D74CE] [--base-gradient-color:#5EB1EF] text-xl font-medium"
+      duration={1}
+      spread={1}
+      zDistance={1}
+      scaleDistance={1.1}
+      rotateYDistance={20}'
+      duration={1}
+      spread={1}
+      zDistance={1}
+      scaleDistance={1.1}
+      rotateYDistance={20}
+    >
+       Generating your Code
+    </TextShimmerWave>
+  </div>
+)}
+
 		<div className="w-4/6 py-4">
 			<div className="bg-black/5 dark:bg-white/5 rounded-2xl p-1.5">
 				<div className="relative">
@@ -255,9 +276,7 @@ export function AI_Prompt() {
 											}
 											adjustHeight(true);
 										}}>
-										{Loading ? (
-											<Loader2 className="animate-spin h-4 w-4 text-white" />
-										) : (
+										
 											<ArrowRight
 												className={cn(
 													"w-4 h-4 text-white transition-opacity duration-200",
@@ -266,7 +285,7 @@ export function AI_Prompt() {
 														: "opacity-70"
 												)}
 											/>
-										)}
+										
 									</Button>
 								</div>
 							</div>
