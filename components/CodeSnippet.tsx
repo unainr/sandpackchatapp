@@ -18,7 +18,7 @@ const CodeSnippet = async ({ codeItem }: string | any) => {
 							src={codeItem.imageUrl}
 							alt="Code Preview"
 							fill
-							priority
+							loading="lazy"
 							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 							className="object-cover transition-all duration-700 ease-in-out "
 							quality={100}

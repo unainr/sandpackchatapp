@@ -12,7 +12,7 @@ import { ModeToggle } from "../ui/mode-toggle";
 const menuItems = [
 	{ name: "Home", href: "/" },
 	{ name: "Generate Code", href: "/generate" },
-	{ name: "Pricing", href: "#link" },
+	{ name: "Pricing", href: "#" },
 ];
 
 const Navbar = () => {
@@ -92,11 +92,6 @@ const Navbar = () => {
 								</ul>
 							</div>
 							<div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-								<Button asChild variant="outline" size="sm">
-									<Link href="/login">
-										<span>Login</span>
-									</Link>
-								</Button>
 								<Button asChild size="sm">
 								
 									<ModeToggle/>
