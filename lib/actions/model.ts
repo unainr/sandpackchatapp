@@ -7,6 +7,7 @@ import { cleanCode, PROMPT_OLD } from "../utils";
 import { ID } from "appwrite";
 import { connectToDatabase } from "../db";
 import { Code } from "@/model/code";
+import { revalidatePath } from "next/cache";
 
 const openai = new OpenAI({
 	baseURL: process.env.OPEN_ROUTER_BASE_URL,
@@ -30,6 +31,7 @@ const imageconvert = async (url: string | any) => {
 
 			return (imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/${appwriteConfig.bucketId}/files/${imageId}/view?project=${projectId}`);
 		}
+		return null;
 	} catch (error) {
 		throw new Error("Failed to generate response" + error);
 	}
@@ -41,9 +43,11 @@ export const ModelGenerate = async (
 	description: string,
 	imageUri: string | any
 ) => {
+	try{
 	const imageUrl = await imageconvert(imageUri);
 
-	const completion = await openai.chat.completions.create({
+	const completion = await openai.chat.completions.create(
+		{
 		model: "google/gemma-3-12b-it:free",
 		messages: [
 			{
@@ -68,19 +72,28 @@ export const ModelGenerate = async (
 	const createdCode = await Code.create({
 		code: compressedCode,
 		imageUrl,
+		createdAt: new Date(),
 	});
+	revalidatePath("/");
+	revalidatePath("/generate");
 	return {
 		success: true,
 		message: "data add successfully",
 		id: createdCode._id.toString(),
 	};
+}catch(error:any){
+	return {
+		success: false,
+		message:error.message,
+	};
+}
 };
 
 export const getAllCodes = async () => {
 	try {
 		await connectToDatabase();
-		const allCodes = await Code.find();
-		return allCodes;
+		const allCodes = await Code.find().sort({ createdAt: -1 }).lean();
+		return JSON.parse(JSON.stringify(allCodes));
 	} catch (error: any) {
 		return { success: false, message: error.message };
 	}
@@ -90,9 +103,11 @@ export const findCode = async (id: string) => {
 		if (!id || id === undefined) return null;
 
 		await connectToDatabase();
-		const code = await Code.findById(id);
-		return code;
-	} catch (error) {
-		throw new Error("Failed to generate response" + error);
+		const code = await Code.findById(id).lean();
+		if (!code) {return {success: false, message: "Code not found"}};
+		return JSON.parse(JSON.stringify(code));
+
+	} catch (error:any) {
+		return{success: false, message: "Code not found"};
 	}
 };

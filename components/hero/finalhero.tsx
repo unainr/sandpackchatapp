@@ -210,7 +210,6 @@ const Scene = () => {
           return renderer;
         }}
       >
-        <PostProcessing fullScreenEffect={true} />
         <Scene />
       </Canvas>
     </div>

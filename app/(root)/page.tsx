@@ -15,7 +15,7 @@ export default async function Home() {
   </div>
    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-3 mx-4">
         {response && response?.map((codeItem: any) => (
-          <CodeSnippet key={codeItem.id} codeItem={codeItem} />
+          <CodeSnippet key={codeItem._id} codeItem={codeItem} />
         ))}
       </div>
     </>
