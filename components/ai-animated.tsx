@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Loader2, Paperclip, X } from "lucide-react";
+import { ArrowRight, Paperclip, X } from "lucide-react";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
