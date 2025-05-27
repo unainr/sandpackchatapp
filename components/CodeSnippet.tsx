@@ -117,7 +117,6 @@ const CodeSnippet = ({ codeItem }: { codeItem: any }) => {
       <div className="p-8">
         {/* Code content with improved styling */}
         <div className="mb-6">
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">Code Preview</h3>
           <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm">
             <CodeBlockThemed codesnippet={codeItem.code.substring(0, 200)} />
           </div>
