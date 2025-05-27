@@ -111,3 +111,15 @@ export const findCode = async (id: string) => {
 		return{success: false, message: "Code not found"};
 	}
 };
+export const deleteCode = async (id:string) =>{
+	try {
+		if (!id || id === undefined) return null;
+		await connectToDatabase();
+		const code = await Code.findByIdAndDelete(id);
+		if (!code) {return {success: false, message: "Code not found"}};
+		return {success: true, message: "Code deleted successfully"};
+	} catch (error:any) {
+		return {success: false, message: "Code not found"};
+		
+	}
+}
