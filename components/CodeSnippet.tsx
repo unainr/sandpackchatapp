@@ -134,14 +134,14 @@ const CodeSnippet = ({ codeItem }: { codeItem: any }) => {
           </Link>
           
           {/* Delete Button */}
-          <Button
+          {/* <Button
             onClick={handleDelete}
             disabled={isDeleting}
 			className="bg-red-500 hover:bg-red-600 text-white cursor-pointer"
           >
             <LucideTrash2 className="h-4 w-4 transition-transform duration-300 group-hover/delete:scale-110" />
             {isDeleting ? "Deleting..." : "Delete"}
-          </Button>
+          </Button> */}
         </div>
         
         {/* Error message with improved styling */}
